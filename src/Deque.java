@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 public class Deque<Item> implements Iterable<Item> {
 
     private int size;
-    private Node first;
-    private Node last;
+    private Node<Item> first;
+    private Node<Item> last;
 
     // construct an empty deque
     public Deque() {
@@ -100,8 +100,8 @@ public class Deque<Item> implements Iterable<Item> {
 
     private class Node<Item> {
 
-        private Node next;
-        private Node previous;
+        private Node<Item> next;
+        private Node<Item> previous;
         private Item item;
 
         public Node(Item item) {
