@@ -30,7 +30,8 @@ public class BruteCollinearPoints {
                 for (int k = j + 1; k < numOfPoints; k++) {
                     for (int l = k + 1; l < numOfPoints; l++) {
                         if (isCollinear(points[i], points[j], points[k], points[l])) {
-                            System.out.println(points[i] + " " + points[j] + " " + points[k] + " " + points[l]);
+                            //System.out.println(points[i] + " " + points[j] + " " + points[k] + " " + points[l]);
+                            
                             numberOfSegments++;
                         }
                     }
@@ -78,6 +79,20 @@ public class BruteCollinearPoints {
         //System.out.println(p1.slopeTo(p8));
         
         System.out.println(bc.numberOfSegments());
+    }
+    
+    public void sort(Point[] points, int start, int end) {
+        if (start >= end) {
+            return;
+        } 
+        int mid = (start + end) / 2;
+        sort(points, start, mid);
+        sort(points, mid + 1, end);
+        merge(points, start, mid, end);
+    }
+    
+    private void merge(Point[] points, int start, int mid, int end) {
+        
     }
     
 }
