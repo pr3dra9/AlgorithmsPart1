@@ -1,11 +1,13 @@
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class BruteCollinearPoints {
 
     private Point[] points;
-
+    
+    
     // finds all line segments containing 4 points
     public BruteCollinearPoints(Point[] points) {
         if (points == null) {
@@ -31,7 +33,12 @@ public class BruteCollinearPoints {
                     for (int l = k + 1; l < numOfPoints; l++) {
                         if (isCollinear(points[i], points[j], points[k], points[l])) {
                             //System.out.println(points[i] + " " + points[j] + " " + points[k] + " " + points[l]);
-                            
+                            ArrayList<Point> qw = new ArrayList<>();
+                            qw.add(points[i]);
+                            qw.add(points[j]);
+                            qw.add(points[k]);
+                            qw.add(points[l]);
+                            qw.sort(points[i].slopeOrder());
                             numberOfSegments++;
                         }
                     }

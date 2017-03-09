@@ -1,3 +1,5 @@
+package percolation;
+
 /******************************************************************************
  *  Compilation:  javac InteractivePercolationVisualizer.java
  *  Execution:    java InteractivePercolationVisualizer n
@@ -11,6 +13,8 @@
  *
  ******************************************************************************/
 
+import percolation.Percolation;
+import percolation.PercolationVisualizer;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
