@@ -1,12 +1,13 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class BruteCollinearPoints {
 
     private Point[] points;
-    
+    private ArrayList<LineSegment> segments = new ArrayList<>();
     
     // finds all line segments containing 4 points
     public BruteCollinearPoints(Point[] points) {
@@ -15,6 +16,9 @@ public class BruteCollinearPoints {
         }
         Set<Point> s = new HashSet<>();
         for (Point point : points) {
+            if (point == null) {
+                throw new NullPointerException();
+            }
             if (s.contains(point)) {
                 throw new IllegalArgumentException();
             }
@@ -38,7 +42,9 @@ public class BruteCollinearPoints {
                             qw.add(points[j]);
                             qw.add(points[k]);
                             qw.add(points[l]);
-                            qw.sort(points[i].slopeOrder());
+                            Collections.sort(qw);
+                            LineSegment ls = new LineSegment(qw.get(0), qw.get(qw.size() - 1));
+                            segments.add(ls);
                             numberOfSegments++;
                         }
                     }
@@ -59,7 +65,7 @@ public class BruteCollinearPoints {
 
     // the line segments
     public LineSegment[] segments() {
-        return null;
+        return segments.toArray(new LineSegment[segments.size()]);
     }
 
     public static void main(String[] args) {
@@ -86,20 +92,12 @@ public class BruteCollinearPoints {
         //System.out.println(p1.slopeTo(p8));
         
         System.out.println(bc.numberOfSegments());
-    }
-    
-    public void sort(Point[] points, int start, int end) {
-        if (start >= end) {
-            return;
-        } 
-        int mid = (start + end) / 2;
-        sort(points, start, mid);
-        sort(points, mid + 1, end);
-        merge(points, start, mid, end);
-    }
-    
-    private void merge(Point[] points, int start, int mid, int end) {
         
+        LineSegment[] ls = bc.segments();
+        for (LineSegment l : ls) {
+            System.out.println(l);
+        }
+                
     }
-    
+        
 }
