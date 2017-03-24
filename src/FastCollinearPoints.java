@@ -32,7 +32,18 @@ public class FastCollinearPoints {
         int numOfPoints = this.points.size();
         for (int i = 0; i < numOfPoints; i++) {
             Collections.sort(this.points, this.points.get(i).slopeOrder());
-        }        
+            for (int j = 0; j < numOfPoints; j++) {
+                for (int k = j + 1; k < numOfPoints; k++) {
+                    int segmentLength = 0;
+                    
+                    if (points[i].slopeTo(points[j]) == points[i].slopeTo(points[k])) {
+                        segmentLength++;
+                    } else if (segmentLength < 4) {
+                        
+                    }
+                }
+            }
+        }
     }
    
     // the number of line segments

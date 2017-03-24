@@ -31,6 +31,8 @@ public class TestCollinear {
             StdOut.println(segment);
             segment.draw();
         }
+        
+
         StdDraw.show();
     }
 

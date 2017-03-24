@@ -8,63 +8,62 @@ public class BruteCollinearPoints {
 
     private Point[] points;
     private ArrayList<LineSegment> segments = new ArrayList<>();
-    
+    int numberOfSegments = 0;
+
     // finds all line segments containing 4 points
     public BruteCollinearPoints(Point[] points) {
         if (points == null) {
             throw new NullPointerException();
         }
-        Set<Point> s = new HashSet<>();
+        Set<String> s = new HashSet<>();
         for (Point point : points) {
             if (point == null) {
                 throw new NullPointerException();
             }
-            if (s.contains(point)) {
+            if (s.contains(point.toString())) {
                 throw new IllegalArgumentException();
             }
-            s.add(point);
+            s.add(point.toString());
         }
+        s.clear();
         this.points = points;
-    }
-
-    // the number of line segments
-    public int numberOfSegments() {
-        int numberOfSegments = 0;
-        int numOfPoints = points.length;
+        
+        int numOfPoints = this.points.length;
         for (int i = 0; i < numOfPoints; i++) {
             for (int j = i + 1; j < numOfPoints; j++) {
                 for (int k = j + 1; k < numOfPoints; k++) {
                     for (int l = k + 1; l < numOfPoints; l++) {
-                        if (isCollinear(points[i], points[j], points[k], points[l])) {
+                        if (isCollinear(this.points[i], this.points[j], this.points[k], this.points[l])) {
                             //System.out.println(points[i] + " " + points[j] + " " + points[k] + " " + points[l]);
-                            ArrayList<Point> qw = new ArrayList<>();
-                            qw.add(points[i]);
-                            qw.add(points[j]);
-                            qw.add(points[k]);
-                            qw.add(points[l]);
-                            Collections.sort(qw);
-                            LineSegment ls = new LineSegment(qw.get(0), qw.get(qw.size() - 1));
-                            segments.add(ls);
                             numberOfSegments++;
+                            ArrayList<Point> lsPoints = new ArrayList<>();
+                            lsPoints.add(this.points[i]);
+                            lsPoints.add(this.points[j]);
+                            lsPoints.add(this.points[k]);
+                            lsPoints.add(this.points[l]);
+                            Collections.sort(lsPoints);
+                            LineSegment ls = new LineSegment(lsPoints.get(0), lsPoints.get(lsPoints.size() - 1));
+                            segments.add(ls);
                         }
                     }
                 }
             }
         }
+    }
+
+    // the number of line segments
+    public int numberOfSegments() {
         return numberOfSegments;
     }
 
     private boolean isCollinear(Point p, Point q, Point r, Point s) {
-        //System.out.println("Slope p, q: " + p.slopeTo(q));
-        //System.out.println("Slope p, r: " + p.slopeTo(r));
-        //System.out.println("Slope p, s: " + p.slopeTo(s));
-        //System.out.println("-----------------------------------");
         return p.slopeTo(q) == p.slopeTo(r) && p.slopeTo(q) == p.slopeTo(s);
-        
     }
 
     // the line segments
     public LineSegment[] segments() {
+        if (segments.isEmpty()) 
+            return null;
         return segments.toArray(new LineSegment[segments.size()]);
     }
 
@@ -90,14 +89,14 @@ public class BruteCollinearPoints {
         //System.out.println(p1.slopeTo(p2));
         //System.out.println(p1.slopeTo(p3));
         //System.out.println(p1.slopeTo(p8));
-        
+
         System.out.println(bc.numberOfSegments());
-        
+
         LineSegment[] ls = bc.segments();
         for (LineSegment l : ls) {
             System.out.println(l);
         }
-                
+
     }
-        
+
 }
