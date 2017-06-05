@@ -10,7 +10,7 @@ public class Percolation {
     private int numOfOpenSite = 0;
     private boolean[] siteState;
 
-    // create n-by-n grid, with all sites blocked
+    // create n-by-n grid, with all sites blocked.
     public Percolation(int n) {
         if (n < 1) {
             throw new IllegalArgumentException();
