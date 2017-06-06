@@ -28,18 +28,20 @@ public class FastCollinearPoints {
             this.points.add(point);
         }
         s.clear();
-
-        int numOfPoints = this.points.size();
+        
+        int numOfPoints = this.points.size();        
         for (int i = 0; i < numOfPoints; i++) {
-            Collections.sort(this.points, this.points.get(i).slopeOrder());
-            for (int j = 0; j < numOfPoints; j++) {
+            ArrayList<Point> orderedPoints = (ArrayList<Point>)this.points.clone();
+            Collections.sort(orderedPoints, orderedPoints.get(i).slopeOrder());
+            
+            for (int j = 1; j < numOfPoints; j++) {
                 for (int k = j + 1; k < numOfPoints; k++) {
                     int segmentLength = 0;
                     
-                    if (points[i].slopeTo(points[j]) == points[i].slopeTo(points[k])) {
+                    if (orderedPoints.get(i).slopeTo(orderedPoints.get(j)) == orderedPoints.get(i).slopeTo(orderedPoints.get(k))) {
                         segmentLength++;
                     } else if (segmentLength < 4) {
-                        
+
                     }
                 }
             }
